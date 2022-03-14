@@ -18,9 +18,10 @@ def login():
     form = LoginForm()
     if request.method == "POST":
         if form.validate_on_submit():
-            return redirect(url_for('success'))
-        else:
-            return redirect(url_for('denied'))
+            if form.data.get("email") == "shalaby@gmail.com" and form.data.get("password") == "123456789":
+                return redirect(url_for('success'))
+            else:
+                return redirect(url_for('denied'))
     else:
         return render_template("login.html", form=form)
 
