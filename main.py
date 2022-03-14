@@ -22,8 +22,8 @@ def login():
                 return redirect(url_for('success'))
             else:
                 return redirect(url_for('denied'))
-    else:
-        return render_template("login.html", form=form)
+        else:
+            return render_template("login.html", form=form)
 
 
 @app.route("/success")
