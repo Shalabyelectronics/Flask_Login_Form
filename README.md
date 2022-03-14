@@ -63,3 +63,33 @@ Also you can watch this video to understand more about it [here](https://www.you
 ### secure your form !!!
 Here we are going to discuss why you need to secure your form ??
 and the answer is from bad hackers who can steel it from Cross-site request forgery (CSRF) and to know more about it [here](https://portswigger.net/web-security/csrf)
+So we need to create a secret key first then assign it to our app config file like this 
+```python
+app.config["SECRET_KEY"] = TOKEN
+# OR 
+app.secret_key = "some secret string"
+```
+And you need to generate the token as well you have two way to do so 
+
+First by using secrets module and using `token_hex(bytes)`
+
+Second by using os module and using `urandom(bytes).hex()`
+Then we need to go back to our form and under form tag directly we need to add 
+`{{ form.csrf_token }}` to activate the secure mode and we used csrf_token because we have only one hidden field and it is a password so if I have more than one hidden field I can use `{{ form.hidden_tag() }}`
+### Creating our login route method.
+We are almost done the final part is a little bit trick where we are going to add some logic to our login route like this 
+```python
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            return redirect(url_for('success'))
+        else:
+            return redirect(url_for('denied'))
+    else:
+        return render_template("login.html", form=form)
+```
+I will explain this logic now first I add ` methods=["GET", "POST"]` to let our method to get or post request data after we submit the form and to check that as well we need to import request from flask.
+So I will check first if the user already post the data by submit it if yes will check if the form is valid and there are no errors if yes we will check if the user email and password are matched So if yes we will redirect the user to the success page else we will redirect the user to denied page.
+## The End :)
