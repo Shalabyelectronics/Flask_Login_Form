@@ -5,7 +5,7 @@ This another Flask practice where we are going to learn about how to use forms-w
 ## How I go throgh this practice ?
 First of all I spend some time figuring out how Flask framwork actually work?
 So After setting up my Flask app by creating my app instance and all routes for each page I start working on login form 
-I used flask-wtf , wtfforms and wtfforms. validators lets explain each 
+I used flask-wtf , wtfforms and validators lets explain each 
 ### Flask_wtf ?
 WTF stands for WT Forms which is intended to provide the interactive user interface for the user. The WTF is a built-in module of the flask which provides an alternative way of designing forms in the flask web applications.
 and you can read more about it from [here](https://www.javatpoint.com/flask-wtf).
